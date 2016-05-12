@@ -3,26 +3,23 @@ package exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
-
-import java.io.IOException;
-import java.sql.SQLException;
 
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.conf.util.App;
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain.Administrator;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain.Exhibit;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Exhibit.ExhibitRepository;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Exhibit.Impl.ExhibitRepositoryImpl;
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Personel.AdministratorRepository;
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Personel.Impl.AdministratorRepositoryImpl;
-import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.restapi.AdministratorAPI;
-import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.restapi.Impl.AdministratorAPIImpl;
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.services.person.AdmistratorServices;
 
 /**
- * Created by Bonga on 5/7/2016.
+ * Created by Bonga on 5/12/2016.
  */
-public class AdministratorServiceImpl extends IntentService implements AdmistratorServices {
+public class ExhibitServicesImpl extends IntentService implements ExhibitServices {
 
 
-    private final AdministratorRepository repo;
+    private final ExhibitRepository repo;
 
 
     private static final String ACTION_ADD = "exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.services.person.action.ADD";
@@ -32,45 +29,45 @@ public class AdministratorServiceImpl extends IntentService implements Admistrat
     private static final String EXTRA_ADD = "exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.services.person.extra.ADD";
     private static final String EXTRA_UPDATE = "exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.services.person.extra.UPDATE";
 
-    private static AdministratorServiceImpl service = null;
+    private static ExhibitServicesImpl service = null;
 
-    public static AdministratorServiceImpl getInstance() {
+    public static ExhibitServicesImpl getInstance() {
         if (service == null)
-            service = new AdministratorServiceImpl();
+            service = new ExhibitServicesImpl();
         return service;
     }
 
-    public AdministratorServiceImpl() {
-        super("AdministratorServiceImpl");
-        repo = new AdministratorRepositoryImpl(App.getAppContext());
+    private ExhibitServicesImpl() {
+        super("ExhibitServiceImpl");
+        repo = new ExhibitRepositoryImpl(App.getAppContext());
     }
 
     @Override
-    public void updateAdmistrator(Context context, Administrator administrator) {
-        Intent intent = new Intent(context, AdministratorRepositoryImpl.class);
+    public void updateExhibit(Context context, Exhibit exhibit) {
+        Intent intent = new Intent(context, ExhibitRepositoryImpl.class);
         intent.setAction(ACTION_ADD);
-        intent.putExtra(EXTRA_ADD, administrator);
+        intent.putExtra(EXTRA_ADD, exhibit);
         context.startService(intent);
     }
 
     @Override
-    public void createAdministrator(Context context, Administrator administrator) {
-        Intent intent = new Intent(context, AdministratorRepositoryImpl.class);
+    public void createExhibit(Context context, Exhibit exhibit) {
+        Intent intent = new Intent(context, ExhibitRepositoryImpl.class);
         intent.setAction(ACTION_UPDATE);
-        intent.putExtra(EXTRA_UPDATE, administrator);
+        intent.putExtra(EXTRA_UPDATE, exhibit);
         context.startService(intent);
     }
 
 
-    private void postCustomer(Administrator admin) {
-        Administrator createdAdministrator = repo.update(admin);
-        repo.save(createdAdministrator);
+    private void postExhibit(Exhibit exhibit) {
+        Exhibit createdExhibit = repo.update(exhibit);
+        repo.save(createdExhibit);
     }
 
 
-    private void updateCustomer(Administrator admin) {
-        Administrator updatedCustomer = repo.update(admin);
-        repo.save(updatedCustomer);
+    private void updateExhibit(Exhibit exhibit) {
+        Exhibit updatedExhibit = repo.update(exhibit);
+        repo.save(updatedExhibit);
     }
 
 
@@ -80,11 +77,11 @@ public class AdministratorServiceImpl extends IntentService implements Admistrat
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_ADD.equals(action)) {
-                final Administrator administrator = (Administrator) intent.getSerializableExtra(EXTRA_ADD);
-                postCustomer(administrator);
+                final Exhibit exhibit = (Exhibit) intent.getSerializableExtra(EXTRA_ADD);
+                postExhibit(exhibit);
             } else if (ACTION_UPDATE.equals(action)) {
-                final Administrator customers = (Administrator) intent.getSerializableExtra(EXTRA_UPDATE);
-                updateCustomer(customers);
+                final Exhibit exhibit = (Exhibit) intent.getSerializableExtra(EXTRA_UPDATE);
+                updateExhibit(exhibit);
             }
 
 
@@ -93,7 +90,3 @@ public class AdministratorServiceImpl extends IntentService implements Admistrat
     }
 
 }
-
-
-
-

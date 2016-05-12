@@ -7,41 +7,54 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.test.AndroidTestCase;
 
+import junit.framework.Assert;
+
+import java.util.Set;
+
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.AdministratorService;
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.conf.util.App;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.domain.Administrator;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Personel.AdministratorRepository;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.repository.Personel.Impl.AdministratorRepositoryImpl;
+import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.services.person.AdmistratorServices;
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.services.person.Impl.AdministratorServiceImpl;
 
 /**
  * Created by Bonga on 5/7/2016.
  */
-public class AdministratorServiceTest extends AndroidTestCase{
-    private AdministratorServiceImpl activateService;
-    private boolean isBound;
 
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
-        Intent intent = new Intent(App.getAppContext(), AdministratorServiceImpl.class);
-        App.getAppContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
+    public class AdministratorServiceTest extends AndroidTestCase{
+      //  private AdministratorService service;
+        private AdministratorRepository repo;
+        private Administrator administrator;
+
+
+        public void setUp()throws Exception
+        {
+            super.setUp();
+            AdministratorRepository repo = new AdministratorRepositoryImpl(this.getContext());
+        }
+
+        public void testAddCash()throws Exception
+        {
+            Long id;
+            Intent intent = new Intent(App.getAppContext(),AdministratorRepositoryImpl.class);
+            AdmistratorServices myservice = new AdministratorServiceImpl();
+            Administrator  administrator1 = new Administrator.Builder()
+                    .name("Bonga")
+                    .persalNumber("05436800")
+                    .surname("Mabulu")
+                    .build();
+
+            myservice.createAdministrator(App.getAppContext(), administrator1);
+            App.getAppContext().startService(intent);
+            id = administrator.getId();
+
+            Set<Administrator> administrator1Set = repo.findAll();
+            Assert.assertEquals(administrator1Set.size(), 10);
+
+        }
+
+
+
     }
-    private ServiceConnection connection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            //AdministratorServiceImpl. binder
-            //        = (AdministratorServiceImpl.ActivateServiceLocalBinder) service;
-            //  activateService = binder.getService();
-
-            //Intent msgIntent = new Intent(AdministratorServiceImpl.class);
-            //msgIntent.putExtra(AdministratorServiceImpl.CONNECTIVITY_SERVICE, "");
-            //startService(msgIntent);
-            isBound = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            isBound = false;
-
-        }
-    };
-
-}
