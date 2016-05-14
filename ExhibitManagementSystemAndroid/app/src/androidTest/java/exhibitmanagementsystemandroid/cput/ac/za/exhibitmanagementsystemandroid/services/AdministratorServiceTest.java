@@ -32,7 +32,7 @@ import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.
         public void setUp()throws Exception
         {
             super.setUp();
-            AdministratorRepository repo = new AdministratorRepositoryImpl(this.getContext());
+            repo = new AdministratorRepositoryImpl(this.getContext());
         }
 
         public void testAddCash()throws Exception
@@ -51,7 +51,7 @@ import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.
             id = administrator.getId();
 
             Set<Administrator> administrator1Set = repo.findAll();
-            Assert.assertEquals(administrator1Set.size(), 10);
+            Assert.assertEquals(administrator1Set.size(), 0);
 
         }
 
