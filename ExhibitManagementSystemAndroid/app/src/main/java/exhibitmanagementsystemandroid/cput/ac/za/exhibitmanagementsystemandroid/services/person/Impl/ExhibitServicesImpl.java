@@ -37,7 +37,7 @@ public class ExhibitServicesImpl extends IntentService implements ExhibitService
         return service;
     }
 
-    private ExhibitServicesImpl() {
+    public ExhibitServicesImpl() {
         super("ExhibitServiceImpl");
         repo = new ExhibitRepositoryImpl(App.getAppContext());
     }

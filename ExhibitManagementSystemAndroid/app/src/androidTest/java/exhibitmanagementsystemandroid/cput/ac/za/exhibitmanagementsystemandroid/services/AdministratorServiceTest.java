@@ -24,7 +24,7 @@ import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.
  */
 
     public class AdministratorServiceTest extends AndroidTestCase{
-      //  private AdministratorService service;
+       private AdministratorService service;
         private AdministratorRepository repo;
         private Administrator administrator;
 

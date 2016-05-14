@@ -34,7 +34,7 @@ public class BallisticServicesImpl extends IntentService implements BallisticSer
         return service;
     }
 
-    private BallisticServicesImpl() {
+    public BallisticServicesImpl() {
         super("BallisticServicesImpl");
         repo = new BallisticRepositoryImpl(App.getAppContext());
     }
