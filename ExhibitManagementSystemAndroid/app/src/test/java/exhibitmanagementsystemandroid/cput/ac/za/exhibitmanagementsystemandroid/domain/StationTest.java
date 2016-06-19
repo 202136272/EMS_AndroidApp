@@ -29,7 +29,7 @@ public class StationTest {
 
     @Test
     public void testNewUpdate() throws Exception {
-        Station stationUpdate = new Station.Builder(station.getName())
+        Station stationUpdate = new Station.Builder()
                 .copy(station)
                 .address("05436800")
                 .build();

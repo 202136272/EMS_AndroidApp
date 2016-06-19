@@ -22,4 +22,14 @@
     <string name="button_update">Update</string>
     <string name="title_activity_administrator_service">AdministratorService</string>
     <string name="button_start_service">Start Admin Manage Service</string>
+    <string name="Start">Start</string>
+    IdNo
+    <string name="IdNo">IdNo</string>
+    <string name="persalNo">PersalNo</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="preview">Preview</string>
+    <string name="submit">Submit</string>
+    <string name="btnHome">Home</string>
+
 </resources>

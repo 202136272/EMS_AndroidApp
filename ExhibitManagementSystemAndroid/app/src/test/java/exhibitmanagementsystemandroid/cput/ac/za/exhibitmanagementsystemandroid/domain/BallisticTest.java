@@ -5,14 +5,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.factory.BallisticFactory;
-import exhibitmanagementsystemandroid.cput.ac.za.exhibitmanagementsystemandroid.factory.ExhibitFactory;
 
 /**
  * Created by Bonga on 4/16/2016.
  */
 public class BallisticTest {
 
+
     private Ballistic ballistic;
+
     @Before
     public void setUp() throws Exception {
 
@@ -26,4 +27,8 @@ public class BallisticTest {
         Assert.assertEquals(ballistic.getType(), "tablets");
 
     }
+
+
 }
+
+

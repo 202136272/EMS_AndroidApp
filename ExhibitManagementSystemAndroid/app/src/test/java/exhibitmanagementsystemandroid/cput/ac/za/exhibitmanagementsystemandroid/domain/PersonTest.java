@@ -30,14 +30,14 @@ public class PersonTest {
 
     @Test
     public void testNewUpdate() throws Exception {
-        Person personUpdate = new Person.Builder(person.getName())
+        Person personUpdate = new Person.Builder()
                 .copy(person)
-                .persalNumber("05436801")
-                .surname("Mabuli")
+                .persalNumber("05436800")
+                .surname("Mabulu")
                 .build();
         Assert.assertEquals(personUpdate.getName(),"Bonga");
-        Assert.assertEquals(personUpdate.getSurname(), "Mabuli");
-        Assert.assertEquals(personUpdate.getPersalNumber(), "05436801");
+        Assert.assertEquals(personUpdate.getSurname(), "Mabulu");
+        Assert.assertEquals(personUpdate.getPersalNumber(), "05436800");
 
     }
 }

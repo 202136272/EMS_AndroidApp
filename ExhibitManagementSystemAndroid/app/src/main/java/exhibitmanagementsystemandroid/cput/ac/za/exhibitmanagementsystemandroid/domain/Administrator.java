@@ -70,4 +70,12 @@ public class Administrator implements Serializable {
             return new Administrator(this);
         }
     }
+
+
+    public String toString()
+    {
+        return String.format("Id : %d\nName :%s\nSurname :%s\nPersalNumber :%s",id,name,surname,persalNumber);
+    }
+
+
 }
